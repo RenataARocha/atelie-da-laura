@@ -7,14 +7,16 @@ import { ShoppingCart, Instagram, X, Plus, Minus, Send, Sparkles, Heart, Star, G
 // Array com todos os produtos disponíveis na loja
 // A Laura pode editar diretamente aqui: nome, preço, categoria e se está em promoção
 const produtos = [
-  { id: 1, nome: "Laço Borboleta Lilás", preco: 25.00, imagem: "https://images.unsplash.com/photo-1566454419290-0a60960b0e81?w=400&h=400&fit=crop", categoria: "Laços", promocao: false },
-  { id: 2, nome: "Tiara Floral Rosa", preco: 35.00, imagem: "https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=400&h=400&fit=crop", categoria: "Tiaras", promocao: true },
-  { id: 3, nome: "Kit 3 Laços Festa", preco: 60.00, imagem: "https://images.unsplash.com/photo-1522512115668-c09775d6f424?w=400&h=400&fit=crop", categoria: "Kits", promocao: false },
-  { id: 4, nome: "Laço Boutique Vermelho", preco: 28.00, imagem: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=400&fit=crop", categoria: "Laços", promocao: false },
-  { id: 5, nome: "Presilha Flor Dupla", preco: 22.00, imagem: "https://images.unsplash.com/photo-1583934755096-9c808d2de3c6?w=400&h=400&fit=crop", categoria: "Presilhas", promocao: true },
-  { id: 6, nome: "Faixa Bebê Delicada", preco: 30.00, imagem: "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=400&h=400&fit=crop", categoria: "Faixas", promocao: false },
-  { id: 7, nome: "Laço Grande Princesa", preco: 32.00, imagem: "https://images.unsplash.com/photo-1566454419290-0a60960b0e81?w=400&h=400&fit=crop", categoria: "Laços", promocao: false },
-  { id: 8, nome: "Tiara Luxo Festa", preco: 45.00, imagem: "https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=400&h=400&fit=crop", categoria: "Tiaras", promocao: true },
+  { id: 1, nome: "Laço festa", preco: 49.99, imagem: "/public/produtos/laco-festa.jpeg", categoria: "Laços", promocao: false },
+  { id: 2, nome: "Faixa RN festa", preco: 35.99, imagem: "/public/produtos/faixa-rn-festa.jpeg", categoria: "Tiaras", promocao: true },
+  { id: 3, nome: "Parzinho festa", preco: 39.99, imagem: "/public/produtos/parzinho-festa.jpeg", categoria: "Kits", promocao: false },
+  { id: 4, nome: "Laço festa Jesus", preco: 21.99, imagem: "/public/produtos/laco-festa-jesus.jpeg", categoria: "Laços", promocao: false },
+  { id: 5, nome: "Tiara festa", preco: 29.99, imagem: "/public/produtos/tiara-festa.jpeg", categoria: "Presilhas", promocao: true },
+  { id: 6, nome: "Laço em linho", preco: 24.99, imagem: "/public/produtos/laço-em-linho.jpeg", categoria: "Faixas", promocao: false },
+  { id: 7, nome: "Laço em cetim", preco: 29.99, imagem: "/public/produtos/laço-em-cetim.jpeg", categoria: "Laços", promocao: false },
+  { id: 8, nome: "Laco Itiele", preco: 19.99, imagem: "/public/produtos/laco-itiele.jpeg", categoria: "Tiaras", promocao: true },
+  { id: 9, nome: "Laço Itiele cetim", preco: 14.99, imagem: "/public/produtos/laco-itiele-cetim.jpeg", categoria: "Tiaras", promocao: true },
+
 ];
 
 // ============================================================================
