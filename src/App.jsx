@@ -7,15 +7,15 @@ import { ShoppingCart, Instagram, X, Plus, Minus, Send, Sparkles, Heart, Star, G
 // Array com todos os produtos disponíveis na loja
 // A Laura pode editar diretamente aqui: nome, preço, categoria e se está em promoção
 const produtos = [
-  { id: 1, nome: "Laço festa", preco: 49.99, imagem: "/public/produtos/laco-festa.jpeg", categoria: "Laços", promocao: false },
-  { id: 2, nome: "Faixa RN festa", preco: 35.99, imagem: "/public/produtos/faixa-rn-festa.jpeg", categoria: "Tiaras", promocao: true },
-  { id: 3, nome: "Parzinho festa", preco: 39.99, imagem: "/public/produtos/parzinho-festa.jpeg", categoria: "Kits", promocao: false },
-  { id: 4, nome: "Laço festa Jesus", preco: 21.99, imagem: "/public/produtos/laco-festa-jesus.jpeg", categoria: "Laços", promocao: false },
-  { id: 5, nome: "Tiara festa", preco: 29.99, imagem: "/public/produtos/tiara-festa.jpeg", categoria: "Presilhas", promocao: true },
-  { id: 6, nome: "Laço em linho", preco: 24.99, imagem: "/public/produtos/laço-em-linho.jpeg", categoria: "Faixas", promocao: false },
-  { id: 7, nome: "Laço em cetim", preco: 29.99, imagem: "/public/produtos/laço-em-cetim.jpeg", categoria: "Laços", promocao: false },
-  { id: 8, nome: "Laco Itiele", preco: 19.99, imagem: "/public/produtos/laco-itiele.jpeg", categoria: "Tiaras", promocao: true },
-  { id: 9, nome: "Laço Itiele cetim", preco: 14.99, imagem: "/public/produtos/laco-itiele-cetim.jpeg", categoria: "Tiaras", promocao: true },
+  { id: 1, nome: "Laço festa", preco: 49.99, imagem: "/produtos/laco-festa.jpeg", categoria: "Laços", promocao: false },
+  { id: 2, nome: "Faixa RN festa", preco: 35.99, imagem: "/produtos/faixa-rn-festa.jpeg", categoria: "Tiaras", promocao: true },
+  { id: 3, nome: "Parzinho festa", preco: 39.99, imagem: "/produtos/parzinho-festa.jpeg", categoria: "Kits", promocao: false },
+  { id: 4, nome: "Laço festa Jesus", preco: 21.99, imagem: "/produtos/laco-festa-jesus.jpeg", categoria: "Laços", promocao: false },
+  { id: 5, nome: "Tiara festa", preco: 29.99, imagem: "/produtos/tiara-festa.jpeg", categoria: "Presilhas", promocao: true },
+  { id: 6, nome: "Laço em linho", preco: 24.99, imagem: "/produtos/laço-em-linho.jpeg", categoria: "Faixas", promocao: false },
+  { id: 7, nome: "Laço em cetim", preco: 29.99, imagem: "/produtos/laço-em-cetim.jpeg", categoria: "Laços", promocao: false },
+  { id: 8, nome: "Laco Itiele", preco: 19.99, imagem: "/produtos/laco-itiele.jpeg", categoria: "Tiaras", promocao: true },
+  { id: 9, nome: "Laço Itiele cetim", preco: 14.99, imagem: "/produtos/laco-itiele-cetim.jpeg", categoria: "Tiaras", promocao: true },
 
 ];
 
