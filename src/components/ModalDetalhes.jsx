@@ -124,4 +124,4 @@ export default function ModalDetalhes({ produto, visivel, onFechar, onAdicionar 
       </div>
     </div>
   );
-}
+} 
