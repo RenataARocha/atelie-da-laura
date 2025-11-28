@@ -22,7 +22,7 @@ export default function Footer() {
             Instagram
           </a>
           <a 
-            href="https://wa.me/5584999666276" 
+  href="https://wa.me/5584999666276?text=Olá!%20Vim%20do%20site%20do%20Ateliê%20da%20Laura%20e%20gostaria%20de%20tirar%20algumas%20dúvidas!%20💜"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-green-300 transition-colors flex items-center gap-2"

@@ -26,6 +26,10 @@ export default function AtelieDaLaura() {
   const [carregando, setCarregando] = useState(false);
   const [produtoDetalhes, setProdutoDetalhes] = useState(null);
   const [mostrarDetalhes, setMostrarDetalhes] = useState(false);
+const [termoPesquisa, setTermoPesquisa] = useState('');
+const [filtroTamanho, setFiltroTamanho] = useState('Todos');
+const [filtroPreco, setFiltroPreco] = useState('Todos');
+
 
   // ========== PREPARAÇÃO DE DADOS ==========
   const categorias = ['Todos', ...new Set(produtos.map(p => p.categoria))];
@@ -38,12 +42,41 @@ export default function AtelieDaLaura() {
     return () => clearInterval(interval);
   }, []);
 
-  // ========== FILTRAGEM DE PRODUTOS ==========
-  const produtosFiltrados = categoriaAtiva === 'Todos' 
-    ? produtos 
+ // ========== FILTRAGEM DE PRODUTOS ==========
+const produtosFiltrados = produtos.filter(produto => {
+  // Filtro por categoria
+  const passaCategoria = categoriaAtiva === 'Todos' 
+    ? true 
     : categoriaAtiva === 'Promoções'
-    ? produtos.filter(p => p.promocao)
-    : produtos.filter(p => p.categoria === categoriaAtiva);
+    ? produto.promocao
+    : produto.categoria === categoriaAtiva;
+
+  // Filtro por pesquisa (nome, material, detalhes)
+  const passaPesquisa = termoPesquisa === '' 
+    ? true 
+    : produto.nome.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+      produto.material.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+      produto.detalhes.toLowerCase().includes(termoPesquisa.toLowerCase());
+
+  // Filtro por tamanho
+  const passaTamanho = filtroTamanho === 'Todos' 
+    ? true 
+    : produto.tamanho === filtroTamanho;
+
+  // Filtro por preço
+  let passaPreco = true;
+  if (filtroPreco === 'Ate20') {
+    passaPreco = produto.preco <= 20;
+  } else if (filtroPreco === 'De20a30') {
+    passaPreco = produto.preco > 20 && produto.preco <= 30;
+  } else if (filtroPreco === 'De30a40') {
+    passaPreco = produto.preco > 30 && produto.preco <= 40;
+  } else if (filtroPreco === 'Acima40') {
+    passaPreco = produto.preco > 40;
+  }
+
+  return passaCategoria && passaPesquisa && passaTamanho && passaPreco;
+});
 
   const produtosVisiveis = produtosFiltrados.slice(0, produtosMostrados);
   const temMaisProdutos = produtosMostrados < produtosFiltrados.length;
@@ -221,7 +254,7 @@ export default function AtelieDaLaura() {
                 Deixe sua pequena ainda mais linda com nossos acessórios exclusivos!
               </p>
               <a 
-                href="https://wa.me/5584999666276?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20laços%20💕" 
+  href="https://wa.me/5584999666276?text=Olá!%20Vim%20do%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20laços%20do%20Ateliê%20da%20Laura!%20💕🎀" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white text-purple-600 px-6 py-3 rounded-full font-bold hover:bg-purple-50 transition-all shadow-lg hover:shadow-xl hover:scale-105"
@@ -233,6 +266,78 @@ export default function AtelieDaLaura() {
             </div>
           </section>
 
+ {/* Barra de Pesquisa e Filtros */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {/* Input de Pesquisa */}
+              <div className="md:col-span-2">
+                <label htmlFor="pesquisa" className="block text-sm font-bold text-gray-700 mb-2">
+                  🔍 Pesquisar
+                </label>
+                <input
+                  id="pesquisa"
+                  type="text"
+                  placeholder="Buscar por nome, material..."
+                  value={termoPesquisa}
+                  onChange={(e) => setTermoPesquisa(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all"
+                />
+              </div>
+
+              {/* Filtro de Tamanho */}
+              <div>
+                <label htmlFor="tamanho" className="block text-sm font-bold text-gray-700 mb-2">
+                  📏 Tamanho
+                </label>
+                <select
+                  id="tamanho"
+                  value={filtroTamanho}
+                  onChange={(e) => setFiltroTamanho(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all bg-white cursor-pointer"
+                >
+                  <option value="Todos">Todos</option>
+                  <option value="P">P (7-8cm)</option>
+                  <option value="M">M (10-12cm)</option>
+                  <option value="G">G (14-16cm)</option>
+                </select>
+              </div>
+
+              {/* Filtro de Preço */}
+              <div>
+                <label htmlFor="preco" className="block text-sm font-bold text-gray-700 mb-2">
+                  💰 Preço
+                </label>
+                <select
+                  id="preco"
+                  value={filtroPreco}
+                  onChange={(e) => setFiltroPreco(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all bg-white cursor-pointer"
+                >
+                  <option value="Todos">Todos</option>
+                  <option value="Ate20">Até R$ 20</option>
+                  <option value="De20a30">R$ 20 - R$ 30</option>
+                  <option value="De30a40">R$ 30 - R$ 40</option>
+                  <option value="Acima40">Acima de R$ 40</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Botão Limpar Filtros */}
+            {(termoPesquisa || filtroTamanho !== 'Todos' || filtroPreco !== 'Todos') && (
+              <button
+                onClick={() => {
+                  setTermoPesquisa('');
+                  setFiltroTamanho('Todos');
+                  setFiltroPreco('Todos');
+                  mostrarNotificacao('Filtros limpos!', 'info');
+                }}
+                className="mt-4 text-purple-600 hover:text-purple-700 font-semibold text-sm"
+              >
+                ✖ Limpar filtros
+              </button>
+            )}
+          </div>
+          
           {/* Grade de Produtos */}
           <section aria-label={`Produtos na categoria ${categoriaAtiva}`}>
             {produtosVisiveis.length === 0 ? (
