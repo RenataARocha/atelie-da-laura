@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <!-- Meta Tags Básicas -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Ateliê da Laura | Laços Infantis e Acessórios Artesanais</title>
+  <meta name="description"
+    content="Laços infantis, tiaras e acessórios artesanais feitos com amor para sua princesa." />
+  <meta name="keywords" content="laços infantis, tiaras, presilhas, faixas, acessórios infantis, laços artesanais" />
+  <meta name="author" content="Ateliê da Laura" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://atelie-da-laura.vercel.app/" />
+  <meta property="og:title" content="Ateliê da Laura | Laços Infantis e Acessórios" />
+  <meta property="og:description" content="Laços infantis e acessórios artesanais feitos com amor para sua princesa." />
+  <meta property="og:image" content="https://atelie-da-laura.vercel.app/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Ateliê da Laura - Laços Infantis e Acessórios" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://atelie-da-laura.vercel.app/" />
+  <meta name="twitter:title" content="Ateliê da Laura | Laços Infantis" />
+  <meta name="twitter:description"
+    content="Laços infantis e acessórios artesanais feitos com amor para sua princesa." />
+  <meta name="twitter:image" content="https://atelie-da-laura.vercel.app/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Tema Mobile -->
+  <meta name="theme-color" content="#dff5e3" />
+
+  <!-- Fonte Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ===========================
+   LOADING GLOBAL
+   =========================== */
+
+    /* BODY recebe a classe .loading antes do React renderizar */
+    body.loading {
+      overflow: hidden;
+      /* evita scroll no loading */
+    }
+
+    /* Fundo */
+    body.loading #root {
+      position: fixed;
+      inset: 0;
+      background-color: #dff5e3;
+      /* verde clarinho */
+      background-image:
+        radial-gradient(circle, white 3px, transparent 3px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.7) 2px, transparent 2px);
+      background-size: 100px 100px, 70px 70px;
+      background-position: 0 0, 30px 30px;
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Borboletas no fundo */
+    body.loading #root::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        url('/borboleta.png'),
+        url('/borboleta.png'),
+        url('/borboleta.png');
+      background-repeat: no-repeat;
+      background-size: 150px, 130px, 140px;
+      background-position:
+        top 15% left 10%,
+        top 60% right 12%,
+        bottom 20% left 50%;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 9997;
+      /* fica POR TRÁS do spinner */
+    }
+
+    /* Animações */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeInOut {
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
