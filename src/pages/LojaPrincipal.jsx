@@ -424,16 +424,19 @@ export default function LojaPrincipal() {
                     📏 Tamanho
                   </label>
                   <select
-                    id="tamanho"
-                    value={filtroTamanho}
-                    onChange={(e) => setFiltroTamanho(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all bg-white cursor-pointer"
-                  >
-                    <option value="Todos">Todos</option>
-                    <option value="P">P (7-8cm)</option>
-                    <option value="M">M (10-12cm)</option>
-                    <option value="G">G (14-16cm)</option>
-                  </select>
+  id="tamanho"
+  value={filtroTamanho}
+  onChange={(e) => setFiltroTamanho(e.target.value)}
+  className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all bg-white cursor-pointer"
+>
+  <option value="Todos">Todos os Tamanhos</option>
+  <option value="PP">PP-24cm (4cm)</option>
+  <option value="P">P-40cm (6cm)</option>
+  <option value="M">M-45cm (8cm)</option>
+  <option value="G">G-65cm (9cm)</option>
+  <option value="GG">GG-70cm (12cm)</option>
+  <option value="Max">Max-90cm (15cm)</option>
+</select>
                 </div>
 
                 <div>

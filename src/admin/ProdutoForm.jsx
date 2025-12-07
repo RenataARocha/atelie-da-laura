@@ -20,7 +20,14 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
   const [mensagem, setMensagem] = useState({ texto: "", tipo: "" });
 
   const categorias = ["Laços", "Tiaras", "Kits", "Presilhas", "Faixas"];
-  const tamanhos = ["P", "M", "G"];
+  const tamanhos = [
+  { valor: "PP", label: "PP-24cm (4cm)" },
+  { valor: "P", label: "P-40cm (6cm)" },
+  { valor: "M", label: "M-45cm (8cm)" },
+  { valor: "G", label: "G-65cm (9cm)" },
+  { valor: "GG", label: "GG-70cm (12cm)" },
+  { valor: "Max", label: "Max-90cm (15cm)" }
+];
 
   // Preenche form se estiver editando
   useEffect(() => {
@@ -30,7 +37,7 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
         preco: produto.preco || "",
         imagem: produto.imagem || "",
         categoria: produto.categoria || "Laços",
-        tamanho: produto.tamanho || "M",
+        tamanho: produto.tamanho || "PP",
         material: produto.material || "",
         detalhes: produto.detalhes || "",
         descricao: produto.descricao || "",
@@ -226,20 +233,19 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
               Tamanho *
             </label>
             <select
-              id="tamanho"
-              name="tamanho"
-              value={formData.tamanho}
-              onChange={handleChange}
-              disabled={carregando}
-              className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all disabled:bg-gray-100 bg-white cursor-pointer"
-            >
-              {tamanhos.map((tam) => (
-                <option key={tam} value={tam}>
-                  {tam} -{" "}
-                  {tam === "P" ? "7-8cm" : tam === "M" ? "10-12cm" : "14-16cm"}
-                </option>
-              ))}
-            </select>
+  id="tamanho"
+  name="tamanho"
+  value={formData.tamanho}
+  onChange={handleChange}
+  disabled={carregando}
+  className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all disabled:bg-gray-100 bg-white cursor-pointer"
+>
+  {tamanhos.map((tam) => (
+    <option key={tam.valor} value={tam.valor}>
+      {tam.label}
+    </option>
+  ))}
+</select>
           </div>
 
           {/* Material */}
