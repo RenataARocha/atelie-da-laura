@@ -133,7 +133,7 @@ A aplicação estará acessível em `http://localhost:5173` (ou porta similar).
 **Renata Rocha** — Desenvolvedora Front-end
 Apaixonada por interfaces bonitas e funcionais.
 
-* **LinkedIn:** [https://linkedin.com/in/renatarocha-dev](https://linkedin.com/in/renatarocha-dev)
-* **GitHub:** [https://github.com/Renata-Rocha](https://github.com/Renata-Rocha)
+* **LinkedIn:** [https://www.linkedin.com/in/renata-alexandre-rocha/](https://www.linkedin.com/in/renata-alexandre-rocha/)
+* **GitHub:** [https://github.com/RenataARocha](https://github.com/RenataARocha)
 
 ---
