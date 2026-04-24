@@ -1,7 +1,12 @@
-import React from 'react';
-import { X, ShoppingCart, Package, Sparkles } from 'lucide-react';
+import React from "react";
+import { X, ShoppingCart, Package, Sparkles } from "lucide-react";
 
-export default function ModalDetalhes({ produto, visivel, onFechar, onAdicionar }) {
+export default function ModalDetalhes({
+  produto,
+  visivel,
+  onFechar,
+  onAdicionar,
+}) {
   if (!visivel || !produto) return null;
 
   const handleAdicionar = () => {
@@ -10,17 +15,19 @@ export default function ModalDetalhes({ produto, visivel, onFechar, onAdicionar 
   };
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
       onClick={onFechar}
     >
-      <div 
+      <div
         className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header com botão fechar */}
         <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center rounded-t-3xl z-10">
-          <h2 className="text-2xl font-bold text-gray-800">Detalhes do Produto</h2>
+          <h2 className="text-2xl font-bold text-gray-800">
+            Detalhes do Produto
+          </h2>
           <button
             onClick={onFechar}
             className="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-100 rounded-full transition-all"
@@ -49,9 +56,7 @@ export default function ModalDetalhes({ produto, visivel, onFechar, onAdicionar 
           {/* Informações */}
           <div className="space-y-4">
             {/* Nome */}
-            <h3 className="text-3xl font-bold text-gray-800">
-              {produto.nome}
-            </h3>
+            <h3 className="text-3xl font-bold text-gray-800">{produto.nome}</h3>
 
             {/* Badges - Categoria, Tamanho, Material */}
             <div className="flex flex-wrap gap-2">
@@ -59,13 +64,15 @@ export default function ModalDetalhes({ produto, visivel, onFechar, onAdicionar 
                 <Sparkles size={16} />
                 {produto.categoria}
               </span>
-              
+
               {/* ✅ Badge de Tamanho - Visual, não no texto */}
-              <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-1">
-                <Package size={16} />
-                Tamanho {produto.tamanho}
-              </span>
-              
+              {produto.categoria !== "Acessórios" && produto.tamanho && (
+                <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-1">
+                  <Package size={16} />
+                  Tamanho {produto.tamanho}
+                </span>
+              )}
+
               <span className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
                 {produto.material}
               </span>

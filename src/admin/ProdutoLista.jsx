@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Edit, Trash2, Star, AlertCircle, CheckCircle } from 'lucide-react';
-import { excluirProduto, alternarPromocao } from '../services/produtoService';
+import React, { useState } from "react";
+import { Edit, Trash2, Star, AlertCircle, CheckCircle } from "lucide-react";
+import { excluirProduto, alternarPromocao } from "../services/produtoService";
 
 export default function ProdutoLista({ produtos, onEditar, onAtualizar }) {
   const [carregando, setCarregando] = useState(null);
-  const [mensagem, setMensagem] = useState({ texto: '', tipo: '' });
+  const [mensagem, setMensagem] = useState({ texto: "", tipo: "" });
 
   const mostrarMensagem = (texto, tipo) => {
     setMensagem({ texto, tipo });
-    setTimeout(() => setMensagem({ texto: '', tipo: '' }), 3000);
+    setTimeout(() => setMensagem({ texto: "", tipo: "" }), 3000);
   };
 
   const handleExcluir = async (id, nome) => {
@@ -18,28 +18,28 @@ export default function ProdutoLista({ produtos, onEditar, onAtualizar }) {
 
     setCarregando(id);
     const result = await excluirProduto(id);
-    
+
     if (result.success) {
-      mostrarMensagem(result.mensagem, 'sucesso');
+      mostrarMensagem(result.mensagem, "sucesso");
       onAtualizar();
     } else {
-      mostrarMensagem(result.error, 'erro');
+      mostrarMensagem(result.error, "erro");
     }
-    
+
     setCarregando(null);
   };
 
   const handleAlternarPromocao = async (id, promocaoAtual) => {
     setCarregando(id);
     const result = await alternarPromocao(id, !promocaoAtual);
-    
+
     if (result.success) {
-      mostrarMensagem(result.mensagem, 'sucesso');
+      mostrarMensagem(result.mensagem, "sucesso");
       onAtualizar();
     } else {
-      mostrarMensagem(result.error, 'erro');
+      mostrarMensagem(result.error, "erro");
     }
-    
+
     setCarregando(null);
   };
 
@@ -61,12 +61,18 @@ export default function ProdutoLista({ produtos, onEditar, onAtualizar }) {
     <div className="space-y-4">
       {/* Mensagem de Feedback */}
       {mensagem.texto && (
-        <div className={`flex items-center gap-2 p-4 rounded-xl ${
-          mensagem.tipo === 'sucesso' 
-            ? 'bg-green-50 text-green-700 border-2 border-green-200' 
-            : 'bg-red-50 text-red-700 border-2 border-red-200'
-        }`}>
-          {mensagem.tipo === 'sucesso' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
+        <div
+          className={`flex items-center gap-2 p-4 rounded-xl ${
+            mensagem.tipo === "sucesso"
+              ? "bg-green-50 text-green-700 border-2 border-green-200"
+              : "bg-red-50 text-red-700 border-2 border-red-200"
+          }`}
+        >
+          {mensagem.tipo === "sucesso" ? (
+            <CheckCircle size={20} />
+          ) : (
+            <AlertCircle size={20} />
+          )}
           <span className="font-semibold">{mensagem.texto}</span>
         </div>
       )}
@@ -82,15 +88,14 @@ export default function ProdutoLista({ produtos, onEditar, onAtualizar }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {produtos.map((produto, index) => (
           <div
-  key={produto.id}
-  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all produto-animado"
-  style={{ animationDelay: `${index * 0.08}s` }}
->
-
+            key={produto.id}
+            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all produto-animado"
+            style={{ animationDelay: `${index * 0.08}s` }}
+          >
             {/* Imagem */}
             <div className="relative h-48 bg-gray-100">
-              <img 
-                src={produto.imagem} 
+              <img
+                src={produto.imagem}
                 alt={produto.nome}
                 className="w-full h-full object-cover"
               />
@@ -109,8 +114,14 @@ export default function ProdutoLista({ produtos, onEditar, onAtualizar }) {
                   <span className="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
                     {produto.categoria}
                   </span>
-                  <h3 className="font-bold text-gray-800 mt-2">{produto.nome}</h3>
-                  <p className="text-sm text-gray-600">Tamanho {produto.tamanho}</p>
+                  <h3 className="font-bold text-gray-800 mt-2">
+                    {produto.nome}
+                  </h3>
+                  {produto.categoria !== "Acessórios" && produto.tamanho && (
+                    <p className="text-sm text-gray-600">
+                      Tamanho {produto.tamanho}
+                    </p>
+                  )}
                 </div>
                 <div className="text-right">
                   <p className="text-xl font-bold text-purple-600">
@@ -122,18 +133,20 @@ export default function ProdutoLista({ produtos, onEditar, onAtualizar }) {
               {/* Ações */}
               <div className="flex gap-2 mt-4">
                 <button
-                  onClick={() => handleAlternarPromocao(produto.id, produto.promocao)}
+                  onClick={() =>
+                    handleAlternarPromocao(produto.id, produto.promocao)
+                  }
                   disabled={carregando === produto.id}
                   className={`flex-1 px-3 py-2 rounded-lg font-semibold transition-all text-sm ${
                     produto.promocao
-                      ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   } disabled:opacity-50`}
                 >
                   <Star size={16} className="inline mr-1" />
-                  {produto.promocao ? 'Em Promoção' : 'Promoção'}
+                  {produto.promocao ? "Em Promoção" : "Promoção"}
                 </button>
-                
+
                 <button
                   onClick={() => onEditar(produto)}
                   disabled={carregando === produto.id}
@@ -142,7 +155,7 @@ export default function ProdutoLista({ produtos, onEditar, onAtualizar }) {
                 >
                   <Edit size={18} />
                 </button>
-                
+
                 <button
                   onClick={() => handleExcluir(produto.id, produto.nome)}
                   disabled={carregando === produto.id}

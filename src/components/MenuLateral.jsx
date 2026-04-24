@@ -18,7 +18,7 @@ export default function MenuLateral({
         {/* Lista de Categorias */}
         <nav aria-label="Filtrar por categoria">
           <ul className="space-y-2">
-            {['Todos', 'Promoções', ...categorias.filter(c => c !== 'Todos')].map((cat, index) => (
+            {['Todos', 'Promoções', 'Acessórios', ...categorias.filter(c => c !== 'Todos' && c !== 'Acessórios')].map((cat, index) => (
               <li key={cat} className={`animate-fade-in-up stagger-${Math.min(index + 1, 6)}`}>
                 <button
                   onClick={() => onSelecionarCategoria(cat)}

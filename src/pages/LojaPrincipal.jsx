@@ -113,8 +113,8 @@ export default function LojaPrincipal() {
       categoriaAtiva === "Todos"
         ? true
         : categoriaAtiva === "Promoções"
-        ? produto.promocao
-        : produto.categoria === categoriaAtiva;
+          ? produto.promocao
+          : produto.categoria === categoriaAtiva;
 
     const passaPesquisa =
       termoPesquisa === ""
@@ -164,18 +164,18 @@ export default function LojaPrincipal() {
           carrinho.map((item) =>
             item.id === produto.id
               ? { ...item, quantidade: item.quantidade + 1 }
-              : item
-          )
+              : item,
+          ),
         );
         mostrarNotificacao(
           `${produto.nome} - quantidade atualizada! 🎀`,
-          "sucesso"
+          "sucesso",
         );
       } else {
         setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
         mostrarNotificacao(
           `${produto.nome} adicionado ao carrinho! ✨`,
-          "sucesso"
+          "sucesso",
         );
       }
     } catch (error) {
@@ -209,14 +209,14 @@ export default function LojaPrincipal() {
           carrinho.map((item) =>
             item.id === produtoId
               ? { ...item, quantidade: novaQuantidade }
-              : item
-          )
+              : item,
+          ),
         );
       }
     } catch (error) {
       mostrarNotificacao(
         "Erro ao alterar quantidade. Tente novamente.",
-        "erro"
+        "erro",
       );
       console.error("Erro ao alterar quantidade:", error);
     }
@@ -225,7 +225,7 @@ export default function LojaPrincipal() {
   const calcularTotal = () => {
     return carrinho.reduce(
       (total, item) => total + item.preco * item.quantidade,
-      0
+      0,
     );
   };
 
@@ -234,7 +234,7 @@ export default function LojaPrincipal() {
       if (carrinho.length === 0) {
         mostrarNotificacao(
           "Adicione produtos ao carrinho antes de enviar",
-          "erro"
+          "erro",
         );
         return;
       }
@@ -249,7 +249,7 @@ export default function LojaPrincipal() {
         mensagem += `  Quantidade: ${item.quantidade}\n`;
         mensagem += `  Valor unitário: R$ ${item.preco.toFixed(2)}\n`;
         mensagem += `  Subtotal: R$ ${(item.preco * item.quantidade).toFixed(
-          2
+          2,
         )}\n\n`;
       });
 
@@ -271,7 +271,7 @@ export default function LojaPrincipal() {
       mensagem += "Gostaria de finalizar este pedido! 💕";
 
       const url = `https://wa.me/${telefone}?text=${encodeURIComponent(
-        mensagem
+        mensagem,
       )}`;
       window.open(url, "_blank");
 
@@ -305,7 +305,7 @@ export default function LojaPrincipal() {
   // ========== CÁLCULO: TOTAL DE ITENS NO CARRINHO ==========
   const totalItens = carrinho.reduce(
     (total, item) => total + item.quantidade,
-    0
+    0,
   );
 
   // ============================================================================
@@ -322,7 +322,7 @@ export default function LojaPrincipal() {
           visivel={notificacao.visivel}
           onFechar={fecharNotificacao}
         />
-        
+
         <Header
           totalItens={totalItens}
           onAbrirCarrinho={() => setMostrarCarrinho(true)}
@@ -331,7 +331,7 @@ export default function LojaPrincipal() {
           banners={banners}
           bannerAtual={bannerAtual}
         />
-        
+
         <div className="container mx-auto px-4 py-8 flex gap-6">
           {/* Menu Lateral Desktop - COM ANIMAÇÃO */}
           <div className="animate-fade-in">
@@ -424,19 +424,19 @@ export default function LojaPrincipal() {
                     📏 Tamanho
                   </label>
                   <select
-  id="tamanho"
-  value={filtroTamanho}
-  onChange={(e) => setFiltroTamanho(e.target.value)}
-  className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all bg-white cursor-pointer"
->
-  <option value="Todos">Todos os Tamanhos</option>
-  <option value="PP">PP-24cm (4cm)</option>
-  <option value="P">P-40cm (6cm)</option>
-  <option value="M">M-45cm (8cm)</option>
-  <option value="G">G-65cm (9cm)</option>
-  <option value="GG">GG-70cm (12cm)</option>
-  <option value="Max">Max-90cm (15cm)</option>
-</select>
+                    id="tamanho"
+                    value={filtroTamanho}
+                    onChange={(e) => setFiltroTamanho(e.target.value)}
+                    className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all bg-white cursor-pointer"
+                  >
+                    <option value="Todos">Todos os Tamanhos</option>
+                    <option value="PP">PP-24cm (4cm)</option>
+                    <option value="P">P-40cm (6cm)</option>
+                    <option value="M">M-45cm (8cm)</option>
+                    <option value="G">G-65cm (9cm)</option>
+                    <option value="GG">GG-70cm (12cm)</option>
+                    <option value="Max">Max-90cm (15cm)</option>
+                  </select>
                 </div>
 
                 <div>
@@ -545,7 +545,7 @@ export default function LojaPrincipal() {
                         setProdutosMostrados((prev) => prev + 6);
                         mostrarNotificacao(
                           "Carregando mais produtos...",
-                          "info"
+                          "info",
                         );
                       }}
                       className="bg-gradient-to-r from-purple-600 to-purple-400 text-white px-8 py-3 rounded-full font-bold hover:shadow-xl transition-all flex items-center gap-2 mx-auto hover:scale-105"
@@ -560,14 +560,14 @@ export default function LojaPrincipal() {
             )}
           </main>
         </div>
-        
+
         <ModalDetalhes
           produto={produtoDetalhes}
           visivel={mostrarDetalhes}
           onFechar={fecharDetalhes}
           onAdicionar={adicionarAoCarrinho}
         />
-        
+
         <Carrinho
           visivel={mostrarCarrinho}
           onFechar={() => setMostrarCarrinho(false)}
@@ -579,7 +579,7 @@ export default function LojaPrincipal() {
           freteCalculado={freteCalculado}
           onFreteCalculado={setFreteCalculado}
         />
-        
+
         <Footer />
       </div>
     </>
