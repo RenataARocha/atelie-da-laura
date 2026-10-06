@@ -19,15 +19,22 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
   const [carregando, setCarregando] = useState(false);
   const [mensagem, setMensagem] = useState({ texto: "", tipo: "" });
 
-  const categorias = ["Laços", "Tiaras", "Kits", "Presilhas", "Faixas"];
+  const categorias = [
+    "Laços",
+    "Tiaras",
+    "Kits",
+    "Presilhas",
+    "Faixas",
+    "Acessórios",
+  ];
   const tamanhos = [
-  { valor: "PP", label: "PP-24cm (4cm)" },
-  { valor: "P", label: "P-40cm (6cm)" },
-  { valor: "M", label: "M-45cm (8cm)" },
-  { valor: "G", label: "G-65cm (9cm)" },
-  { valor: "GG", label: "GG-70cm (12cm)" },
-  { valor: "Max", label: "Max-90cm (15cm)" }
-];
+    { valor: "PP", label: "PP-24cm (4cm)" },
+    { valor: "P", label: "P-40cm (6cm)" },
+    { valor: "M", label: "M-45cm (8cm)" },
+    { valor: "G", label: "G-65cm (9cm)" },
+    { valor: "GG", label: "GG-70cm (12cm)" },
+    { valor: "Max", label: "Max-90cm (15cm)" },
+  ];
 
   // Preenche form se estiver editando
   useEffect(() => {
@@ -46,6 +53,15 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
     }
   }, [produto]);
 
+  useEffect(() => {
+    if (formData.categoria === "Acessórios") {
+      setFormData((prev) => ({
+        ...prev,
+        tamanho: "",
+      }));
+    }
+  }, [formData.categoria]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -63,18 +79,28 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
       setMensagem({ texto: "Nome do produto é obrigatório", tipo: "erro" });
       return false;
     }
+
     if (!formData.preco || formData.preco <= 0) {
       setMensagem({ texto: "Preço deve ser maior que zero", tipo: "erro" });
       return false;
     }
+
     if (!formData.imagem) {
       setMensagem({ texto: "Imagem é obrigatória", tipo: "erro" });
       return false;
     }
+
     if (!formData.material.trim()) {
       setMensagem({ texto: "Material é obrigatório", tipo: "erro" });
       return false;
     }
+
+    // 👉 COLOCA AQUI
+    if (formData.categoria !== "Acessórios" && !formData.tamanho) {
+      setMensagem({ texto: "Tamanho é obrigatório", tipo: "erro" });
+      return false;
+    }
+
     return true;
   };
 
@@ -93,6 +119,7 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
       const dadosProduto = {
         ...formData,
         preco: parseFloat(formData.preco),
+        tamanho: formData.categoria === "Acessórios" ? null : formData.tamanho,
       };
 
       // Salva ou atualiza
@@ -225,28 +252,30 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
           </div>
 
           {/* Tamanho */}
-          <div>
-            <label
-              htmlFor="tamanho"
-              className="block text-sm font-bold text-gray-700 mb-2"
-            >
-              Tamanho *
-            </label>
-            <select
-  id="tamanho"
-  name="tamanho"
-  value={formData.tamanho}
-  onChange={handleChange}
-  disabled={carregando}
-  className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all disabled:bg-gray-100 bg-white cursor-pointer"
->
-  {tamanhos.map((tam) => (
-    <option key={tam.valor} value={tam.valor}>
-      {tam.label}
-    </option>
-  ))}
-</select>
-          </div>
+          {formData.categoria !== "Acessórios" && (
+            <div>
+              <label
+                htmlFor="tamanho"
+                className="block text-sm font-bold text-gray-700 mb-2"
+              >
+                Tamanho *
+              </label>
+              <select
+                id="tamanho"
+                name="tamanho"
+                value={formData.tamanho}
+                onChange={handleChange}
+                disabled={carregando}
+                className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-500 focus:outline-none transition-all disabled:bg-gray-100 bg-white cursor-pointer"
+              >
+                {tamanhos.map((tam) => (
+                  <option key={tam.valor} value={tam.valor}>
+                    {tam.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           {/* Material */}
           <div>
@@ -329,13 +358,12 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
 
         {/* Botões */}
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-
-  {/* Cancelar */}
-  <button
-    type="button"
-    onClick={onCancelar}
-    disabled={carregando}
-    className="
+          {/* Cancelar */}
+          <button
+            type="button"
+            onClick={onCancelar}
+            disabled={carregando}
+            className="
       w-full sm:flex-1 
       bg-gray-200 text-gray-700 
       py-3 rounded-xl font-bold 
@@ -343,15 +371,15 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
       transition-all 
       disabled:opacity-50
     "
-  >
-    Cancelar
-  </button>
+          >
+            Cancelar
+          </button>
 
-  {/* Salvar / Atualizar */}
-  <button
-    type="submit"
-    disabled={carregando}
-    className="
+          {/* Salvar / Atualizar */}
+          <button
+            type="submit"
+            disabled={carregando}
+            className="
       w-full sm:flex-1 
       min-h-[52px] 
       bg-gradient-to-r from-purple-600 to-purple-400
@@ -361,19 +389,19 @@ export default function ProdutoForm({ produto, onSalvar, onCancelar }) {
       flex items-center justify-center gap-2
       text-sm sm:text-base
     "
-  >
-    {carregando ? (
-      <>
-        <Loader className="animate-spin" size={20} />
-        Salvando...
-      </>
-    ) : (
-      <>
-        <Save size={20} />
-        {produto ? 'Atualizar' : 'Salvar'} Produto
-      </>
-    )}
-  </button>
+          >
+            {carregando ? (
+              <>
+                <Loader className="animate-spin" size={20} />
+                Salvando...
+              </>
+            ) : (
+              <>
+                <Save size={20} />
+                {produto ? "Atualizar" : "Salvar"} Produto
+              </>
+            )}
+          </button>
         </div>
       </form>
     </div>
